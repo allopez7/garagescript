@@ -1,7 +1,7 @@
-const r = require('./addition.js');
+const add = require('./addition.js');
 
 const test = (a,b,c) => {
-  if(r(a,b) === c) {
+  if(add(a,b) === c) {
     console.log('Correct');
   } else {
     console.log('Wrong');
