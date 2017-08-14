@@ -1,0 +1,33 @@
+allows for thinking before writing
+there is two import modes 
+normal, insert
+
+vim [name of file] - create a file and go into it
+
+Normal Mode 
+h-left
+j-down
+k-up
+l-right
+
+{ - move to next paragraph
+} - move to previous paragraph
+
+w - go to next word
+b - go to previous word
+
+#G - go to specific line
+gg - go to top line
+0G - go to bottom line
+
+Insert mode
+I - go to beginning of the line and place in insert mode
+i - insert at location of cursor
+A - go to end of the line in insert modes
+a - go to after the cursor in insert mode
+
+edit 
+s - replace character and place in insert mode at cursor
+P - paste deleted info in clipboard
+dd - delete current line 
+

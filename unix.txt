@@ -1,0 +1,17 @@
+unix 
+
+
+cd [name of directory]- change directory
+mv [from] [to] - move file from somewhere to. Also, allow for name changing
+cp [from] [to] - copies file or directory
+mkdir - make a directory
+rmdir - remove a directory
+rm  [file] - remove a file 
+rm -rF [name of directory] - remove directory recursively without prompting for permission
+rm -r [name of directory] - remove recursively but ask for permission
+ls - list all files directories in current directory
+cat - show inside file in command line
+cd ~ - go to your home directory
+cd . - current directory
+cd .. - previous directory
+touch - create a file 
