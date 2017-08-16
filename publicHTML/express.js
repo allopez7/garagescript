@@ -6,7 +6,7 @@ app.use(express.static('public'));
 
 const response = (req,res) =>{
 
-  fs.writeFile('/home/alopez/garagescript/publicHTML/public/book.txt',req.query.Name+': '+req.query.Comment+'\n',
+  fs.appendFile('/home/alopez/garagescript/publicHTML/public/book.txt',req.query.Name+': '+req.query.Comment+'\n',
     (err)=>{});
   res.send('done');
 
