@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  Name: <input type="TEXT" id="name"/>
+  Comment: <input type="TEXT" id="comment"/>
+  Submit: <input type="SUBMIT" id="submit"/>
+
+  <script>
+    const button = document.getElementById('submit');
+    button.onclick = () =>{
+      const Name = document.getElementById('name').value;
+      const Comm = document.getElementById('comment').value;
+      const httpReq = new XMLHttpRequest();
+      httpReq.open('GET', `/request?name=${Name}&comment=${Comm}`);
+      httpReq.send();
+    }
+  </script>
+
+</body>
+</html>
