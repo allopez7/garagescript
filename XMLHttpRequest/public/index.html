@@ -12,10 +12,10 @@
   <script>
     const button = document.getElementById('submit');
     button.onclick = () =>{
-      const Name = document.getElementById('name').value;
-      const Comm = document.getElementById('comment').value;
+      const nam = document.getElementById('name').value;
+      const comm = document.getElementById('comment').value;
       const httpReq = new XMLHttpRequest();
-      httpReq.open('GET', `/request?name=${Name}&comment=${Comm}`);
+      httpReq.open('GET', `/request?name=${nam}&comment=${comm}`);
       httpReq.send();
     }
   </script>
