@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+
+  Name: <input type="TEXT" id="name"/>
+  Comment: <input type="TEXT" id="comment"/>
+  Submit: <input type="SUBMIT" id="submit"/>
+  <pre id="browserViewText"></pre>
+  <script>
+
+    const button = document.getElementById('submit');
+    button.onclick = () =>{
+      const nam = document.getElementById('name').value;
+      const com = document.getElementById('comment').value;
+      const httpReq = new XMLHttpRequest();
+      httpReq.open('GET',`/send?name=${nam}&comment=${com}`);
+      httpReq.send();
+    }
+
+window.setInterval(()=>{
+
+  const httpReq2 = new XMLHttpRequest();
+  const display = document.getElementById('browserViewText');
+  httpReq2.open('GET','/book.txt');
+
+  httpReq2.onreadystatechange = ()=>{
+    if(httpReq2.responseText){
+      display.innerHTML = httpReq2.responseText;
+    }
+  }
+
+  httpReq2.send();
+  
+},1000);
+
+  </script>
+
+</body>
+</html>
