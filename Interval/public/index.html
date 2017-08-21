@@ -28,8 +28,7 @@ window.setInterval(()=>{
   httpReq2.open('GET','/book.txt');
 
   httpReq2.onreadystatechange = ()=>{
-    if(httpReq2.responseText)
-    {
+    if(httpReq2.responseText){
       display.innerHTML = httpReq2.responseText;
     }
   }
