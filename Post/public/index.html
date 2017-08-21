@@ -20,11 +20,11 @@
       httpReq.open('POST','/send');
       httpReq.setRequestHeader('content-type','application/json');
       httpReq.send(
-          JSON.stringify({
-            name: nam,
-            comment: com
-          })
-          );
+        JSON.stringify({
+          name: nam,
+          comment: com
+        })
+      );
     }
 
 window.setInterval(()=>{
