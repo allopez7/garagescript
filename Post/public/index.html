@@ -17,8 +17,14 @@
       const nam = document.getElementById('name').value;
       const com = document.getElementById('comment').value;
       const httpReq = new XMLHttpRequest();
-      httpReq.open('GET',`/send?name=${nam}&comment=${com}`);
-      httpReq.send();
+      httpReq.open('POST','/send');
+      httpReq.setRequestHeader('content-type','application/json');
+      httpReq.send(
+        JSON.stringify({
+          name: nam,
+          comment: com
+        })
+      );
     }
 
 window.setInterval(()=>{
