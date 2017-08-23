@@ -5,7 +5,6 @@ const app = express();
 
 app.listen(3608);
 app.use(express.static('public'));
-//app.use(bp.json());
 app.use(bp.json({limit: "500mb"}));
 
 const response = (req,res) =>{
