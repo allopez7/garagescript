@@ -15,9 +15,8 @@ const response = (req,res) =>{
 app.post('/send', response);
 
 const resp2 = (req, res) =>{
-  fs.writeFile('/home/alopez/garagescript/Webcam/public/'+req.body.name+'.'+'png',req.body.Canvas.replace('data:image/png;base64',""),'base64',() =>{
-  res.send('done');  
+  fs.writeFile('/home/alopez/garagescript/Webcam/public/image.png',req.body.Canvas.replace('data:image/png;base64',""),'base64',() =>{
 });
+  res.send('done');  
 }
-
 app.post('/image', resp2);
