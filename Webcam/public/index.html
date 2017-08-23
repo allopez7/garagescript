@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+
+  Name: <input type="TEXT" id="name"/>
+  Comment: <input type="TEXT" id="comment"/>
+  Submit: <input type="SUBMIT" id="submit"/>
+  <pre id="browserViewText"></pre>
+  <video id="v"></video>
+  <canvas id="can" height=200 width=200></canvas>
+  <button id="pic">Take Picture</button>
+
+  <script>
+
+    const button = document.getElementById('submit');
+    button.onclick = () =>{
+      const nam = document.getElementById('name').value;
+      const com = document.getElementById('comment').value;
+      const httpReq = new XMLHttpRequest();
+      httpReq.open('POST','/send');
+      httpReq.setRequestHeader('content-type','application/json');
+      httpReq.send(
+        JSON.stringify({
+          name: nam,
+          comment: com
+        })
+      );
+    }
+
+window.setInterval(()=>{
+
+  const httpReq2 = new XMLHttpRequest();
+  const display = document.getElementById('browserViewText');
+  httpReq2.open('GET','/book.txt');
+
+  httpReq2.onreadystatechange = ()=>{
+    if(httpReq2.responseText){
+      display.innerHTML = httpReq2.responseText;
+    }
+  }
+
+  httpReq2.send();
+  
+},1000);
+
+const vid = document.getElementById('v');
+
+navigator.mediaDevices.getUserMedia({video: true, audio: false}).then((source) =>{ vid.srcObject = source;
+  vid.play();
+});
+
+const takePicture = document.getElementById('pic');
+const canv = document.getElementById('can');
+
+takePicture.onclick = () =>{
+  const nam = document.getElementById('name').value;
+  const contex = canv.getContext('2d');
+  const img = new XMLHttpRequest();
+  contex.drawImage(vid,0,0);
+  const can = canv.toDataURL('image/png');
+  
+  img.open('POST','/image');
+  img.setRequestHeader('content-type','application/json');
+  img.send(
+      JSON.stringify(
+        {
+          Canvas: can,
+          name: nam
+        }
+        )
+     ) 
+   
+}
+
+  </script>
+
+</body>
+</html>
