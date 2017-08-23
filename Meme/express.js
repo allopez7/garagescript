@@ -16,7 +16,7 @@ app.post('/send', response);
 
 const resp2 = (req, res) =>{
   fs.writeFile('/home/alopez/garagescript/Webcam/public/'+req.body.name+'.'+'png',req.body.Canvas.replace('data:image/png;base64',""),'base64',() =>{
-    gm('/home/alopez/texting_interval2/public/'+req.body.name+'.'+'png').fontSize(40).drawText(50,50,'hello').write('/home/alopez/texting_interval2/public/text.png',(err)=>{$
+    gm('/home/alopez/texting_interval2/public/'+req.body.name+'.'+'png').fontSize(40).drawText(50,50,'hello').write('/home/alopez/texting_interval2/public/meme.png',(err)=>{$
         console.log("drror is", err);$
         });
 });
