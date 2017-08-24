@@ -12,7 +12,6 @@ const response = (req,res) =>{
   fs.appendFile('/home/alopez/garagescript/Meme/public/book.txt',`${req.body.name}: ${req.body.comment}`+'\n',()=>{});
   res.send();
 }
-
 app.post('/send', response);
 
 const resp2 = (req, res) =>{
