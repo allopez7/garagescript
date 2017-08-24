@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<div>
+  Name: <input type="TEXT" id="name"/>
+  Comment: <input type="TEXT" id="comment"/>
+  Submit: <input type="SUBMIT" id="submit"/>
+  <pre id="browserViewText"></pre>
+</div>
+  <video id="video"></video>
+  <canvas id="canvas" height=200 width=200></canvas>
+  <button id="picture">Take Picture</button>
+
+  <script>
+
+    const button = document.getElementById('submit');
+    button.onclick = () =>{
+      const name = document.getElementById('name').value;
+      const comment = document.getElementById('comment').value;
+      const httpReq = new XMLHttpRequest();
+      httpReq.open('POST','/send');
+      httpReq.setRequestHeader('content-type','application/json');
+      httpReq.send(
+        JSON.stringify({
+          name: name,
+          comment: comment
+        })
+      );
+    }
+
+const getTextFile = () =>{
+
+  const httpReq2 = new XMLHttpRequest();
+  const display = document.getElementById('browserViewText');
+  httpReq2.open('GET','/book.txt');
+
+  httpReq2.onreadystatechange = ()=>{
+    if(httpReq2.responseText){
+      display.innerHTML = httpReq2.responseText;
+    }
+  }
+
+  httpReq2.send();
+  
+} 
+
+window.setInterval(getTextFile, 1000);
+
+const video = document.getElementById('video');
+
+navigator.mediaDevices.getUserMedia({video: true, audio: false}).then((source) =>{ video.srcObject = source;
+  video.play();
+});
+
+const takePicture = document.getElementById('picture');
+const canvas = document.getElementById('canvas');
+
+takePicture.onclick = () =>{
+  
+  const context = canvas.getContext('2d');
+  const httpReq = new XMLHttpRequest();
+  context.drawImage(video,0,0);
+  const dataURL = canvas.toDataURL('image/png');
+  
+  httpReq.open('POST','/image');
+  httpReq.setRequestHeader('content-type','application/json');
+  httpReq.send(
+      JSON.stringify(
+        {
+          Canvas: dataURL
+        }
+      )
+  ) 
+}
+  </script>
+
+</body>
+</html>
