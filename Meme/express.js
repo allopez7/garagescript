@@ -16,7 +16,7 @@ app.post('/send', response);
 
 const resp2 = (req, res) =>{
   fs.writeFile('/home/alopez/garagescript/Meme/public/'+req.body.name+'.'+'png',req.body.Canvas.replace('data:image/png;base64',""),'base64',() =>{
-   gm('/home/alopez/garagescript/Meme/public/'+req.body.name+'.'+'png').fontSize(40).drawText(50,50,'hello').write('/home/alopez/garagescript/Meme/public/text.png',(err)=>{
+   gm('/home/alopez/garagescript/Meme/public/'+req.body.name+'.'+'png').fontSize(40).drawText(50,50,req.body.comment).write('/home/alopez/garagescript/Meme/public/text.png',(err)=>{
      console.log("error is", err);
    });
 });

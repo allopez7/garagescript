@@ -61,6 +61,7 @@ const canvas = document.getElementById('canvas');
 
 takePicture.onclick = () =>{
   const name = document.getElementById('name').value; 
+  const comment = document.getElementById('comment').value;
   const context = canvas.getContext('2d');
   const httpReq = new XMLHttpRequest();
   context.drawImage(video,0,0);
@@ -72,7 +73,8 @@ takePicture.onclick = () =>{
       JSON.stringify(
         {
           Canvas: dataURL,
-          name: name
+          name: name,
+          comment: comment
         }
       )
   ) 
