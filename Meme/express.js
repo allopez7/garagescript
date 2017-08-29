@@ -8,25 +8,24 @@ app.listen(3608);
 app.use(express.static('public'));
 app.use(bp.json({limit: "500mb"}));
 
-const response = (req,res) =>{
+const appendTextToFile = (req,res) =>{
   const chatMessage = `${req.body.name}: ${req.body.comment}\n`;
   const textFilePath = '/home/alopez/garagescript/Meme/public/book.txt';
 
   fs.appendFile(textFilePath, chatMessage,()=>{});
-  res.send();
+  res.send('append comment to /book.txt');
 }
-app.post('/send', response);
+app.post('/send', appendTextToFile);
 
-const resp2 = (req, res) =>{
+const createImageMeme = (req, res) =>{
   const imagePath = `/home/alopez/garagescript/Meme/public/${req.body.name}.png`;
   const imageData = req.body.Canvas.replace('data:image/png;base64',""); 
-  const imageMeme = '/home/alopez/garagescript/Meme/public/text.png'; 
+  const imageMeme = `/home/alopez/garagescript/Meme/public/${req.body.name}.png`; 
 
   fs.writeFile(imagePath, imageData,'base64',() =>{
-   gm(imagePath).fontSize(40).drawText(50,50,req.body.comment).write(imageMeme,(err)=>{
-     console.log("error is", err);
+   gm(imagePath).fontSize(40).drawText(50,50,req.body.comment).write(imageMeme,()=>{
    });
 });
-  res.send('done');  
+  res.send('png image saved and png meme created');  
 }
-app.post('/image', resp2);
+app.post('/image', createImageMeme);
