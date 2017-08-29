@@ -25,9 +25,7 @@
       httpReq.open('POST','/send');
       httpReq.setRequestHeader('content-type','application/json');
       httpReq.send(
-        JSON.stringify({
-          name: name, comment: comment
-        })
+        JSON.stringify({name, comment})
       );
     }
 
@@ -70,11 +68,7 @@ takePicture.onclick = () =>{
   httpReq.open('POST','/image');
   httpReq.setRequestHeader('content-type','application/json');
   httpReq.send(
-      JSON.stringify(
-        {
-          data: dataURL, name, comment
-        }
-      )
+      JSON.stringify({data: dataURL, name, comment})
   ) 
 }
 
