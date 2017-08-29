@@ -18,12 +18,11 @@ const appendTextToFile = (req,res) =>{
 app.post('/send', appendTextToFile);
 
 const createImageMeme = (req, res) =>{
-  const imagePath = `/home/alopez/garagescript/Meme/public/${req.body.name}.png`;
   const imageData = req.body.data;
   const imageMeme = `/home/alopez/garagescript/Meme/public/${req.body.name}.png`; 
 
-  fs.writeFile(imagePath, imageData,'base64',() =>{
-    gm(imagePath).fontSize(40).drawText(50,50,req.body.comment).write(imageMeme,()=>{
+  fs.writeFile(imageMeme, imageData,'base64',() =>{
+    gm(imageMeme).fontSize(40).drawText(50,50,req.body.comment).write(imageMeme,()=>{
    });
 });
   res.send('png image saved and png meme created');  
