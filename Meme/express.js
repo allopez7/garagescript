@@ -19,7 +19,7 @@ app.post('/send', appendTextToFile);
 
 const createImageMeme = (req, res) =>{
   const imagePath = `/home/alopez/garagescript/Meme/public/${req.body.name}.png`;
-  const imageData = req.body.Canvas.replace('data:image/png;base64',""); 
+  const imageData = req.body.data;
   const imageMeme = `/home/alopez/garagescript/Meme/public/${req.body.name}.png`; 
 
   fs.writeFile(imagePath, imageData,'base64',() =>{

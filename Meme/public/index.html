@@ -26,8 +26,7 @@
       httpReq.setRequestHeader('content-type','application/json');
       httpReq.send(
         JSON.stringify({
-          name: name,
-          comment: comment
+          name: name, comment: comment
         })
       );
     }
@@ -52,7 +51,8 @@ window.setInterval(getTextFile, 1000);
 
 const video = document.getElementById('video');
 
-navigator.mediaDevices.getUserMedia({video: true, audio: false}).then((source) =>{ video.srcObject = source;
+navigator.mediaDevices.getUserMedia({video: true, audio: false}).then((source) =>{ 
+  video.srcObject = source;
   video.play();
 });
 
@@ -65,16 +65,14 @@ takePicture.onclick = () =>{
   const context = canvas.getContext('2d');
   const httpReq = new XMLHttpRequest();
   context.drawImage(video,0,0);
-  const dataURL = canvas.toDataURL('image/png');
+  const dataURL = canvas.toDataURL('image/png').replace('data:image/png;base64',"");
   
   httpReq.open('POST','/image');
   httpReq.setRequestHeader('content-type','application/json');
   httpReq.send(
       JSON.stringify(
         {
-          Canvas: dataURL,
-          name: name,
-          comment: comment
+          data: dataURL, name, comment
         }
       )
   ) 
