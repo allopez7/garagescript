@@ -23,7 +23,7 @@ const createImageMeme = (req, res) =>{
   const imageMeme = `/home/alopez/garagescript/Meme/public/${req.body.name}.png`; 
 
   fs.writeFile(imagePath, imageData,'base64',() =>{
-   gm(imagePath).fontSize(40).drawText(50,50,req.body.comment).write(imageMeme,()=>{
+    gm(imagePath).fontSize(40).drawText(50,50,req.body.comment).write(imageMeme,()=>{
    });
 });
   res.send('png image saved and png meme created');  
