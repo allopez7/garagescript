@@ -59,3 +59,12 @@ $('#picture').click(()=>{
     }
   });
 });
+
+const getMeme = () =>{
+  $.get('/public/*.png', (data) =>{
+    const meme = $('#meme');
+    meme.html(data);
+  });
+}
+
+window.setInterval(getMeme, 1000);
