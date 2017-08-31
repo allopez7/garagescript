@@ -61,10 +61,13 @@ $('#picture').click(()=>{
 });
 
 const getMeme = () =>{
-  $.get('/public/*.png', (data) =>{
+  $.get('/memes', (data) =>{
     const meme = $('#meme');
+    console.log(data);
     meme.html(data);
-  });
+   
+  }
+  );
 }
 
 window.setInterval(getMeme, 1000);

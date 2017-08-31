@@ -18,13 +18,35 @@ const appendTextToFile = (req,res) =>{
 app.post('/send',appendTextToFile);
 
 const createImageMeme = (req, res) =>{
+
   const imageData = req.body.Canvas.replace('data:image/png;base64',""); 
   const imageMeme = `/home/alopez/garagescript/jquery_challenge/public/images/${req.body.name}.png`; 
 
-  fs.writeFile(imageMeme,imageData,'base64',() =>{
-    gm(imageMeme).fontSize(40).drawText(50,50,req.body.comment).write(imageMeme,(err)=>{
-   });
+fs.writeFile(imageMeme,imageData,'base64',() =>{
+    gm(imageMeme).fontSize(40).drawText(50,50,req.body.comment).write(imageMeme,(imageMeme)=>{
+    });
 });
-  res.send('png Image saved and png meme created');  
+
+res.send('create memes');  
+
 }
+
 app.post('/image', createImageMeme);
+
+let arrMemes = [];
+console.log(arrMemes);
+app.post('/memes', (req, res)=>{
+
+  const indexMemes = (meme) =>{
+     arrMemes.push(meme);
+  }
+
+  const memeImages = (err,images)=>{
+    images.forEach(indexMemes);
+    res.sendFile(arrMemes);
+  }
+  fs.readdir('./images', nameImages);
+
+}
+)
+
