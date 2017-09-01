@@ -66,7 +66,7 @@ const getMeme = () =>{
     const meme = $('#meme');
 
     data.forEach((image)=>{
-      meme.html(`<img src=${image}/>`);
+      meme.html(`<img src=/home/alopez/garagescript/jquery_challenge/public/image/${image}/>`);
   });
 
   });
