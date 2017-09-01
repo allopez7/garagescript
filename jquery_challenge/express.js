@@ -33,19 +33,20 @@ res.send('create memes');
 
 app.post('/image', createImageMeme);
 
-let arrMemes = [];
-console.log(arrMemes);
-app.post('/memes', (req, res)=>{
+app.get('/memes', (req, res)=>{
 
+  let arrMemes = [];
   const indexMemes = (meme) =>{
      arrMemes.push(meme);
   }
 
   const memeImages = (err,images)=>{
     images.forEach(indexMemes);
-    res.sendFile(arrMemes);
+    res.send(arrMemes);
+    console.log(arrMemes);
   }
-  fs.readdir('./images', nameImages);
+
+  fs.readdir('/home/alopez/garagescript/jquery_challenge/public/images', memeImages);
 
 }
 )
