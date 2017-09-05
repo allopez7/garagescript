@@ -31,6 +31,7 @@ window.setInterval(getTextFile, 1000);
 //video 
 const video = $('#video')[0];
 
+
 navigator.mediaDevices.getUserMedia({video: true, audio: false}).then((stream)=>{
   video.srcObject = stream;
   video.play();
@@ -60,14 +61,20 @@ $('#picture').click(()=>{
   });
 });
 
+
 const getMeme = () =>{
+let sumMemes = '';
 
-  $.get('/memes', (data) =>{
-    const meme = $('#meme');
+const everyMeme = (image)=>{
+  console.log(image);
+  const meme = $('#meme');
+  sumMemes = sumMemes+`<img src=/images/${image}?cacheBusting=${Math.random()}>`;
+  meme.html(sumMemes);
+  }
 
-    data.forEach((image)=>{
-      meme.html(`<img src=/home/alopez/garagescript/jquery_challenge/public/image/${image}/>`);
-  });
+    $.get('/memes', (data) =>{
+
+    data.forEach(everyMeme);
 
   });
 }
