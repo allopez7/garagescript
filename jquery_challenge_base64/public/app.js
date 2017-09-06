@@ -55,28 +55,35 @@ $('#picture').click(()=>{
       name: name,
       comment: comment
     }),
-    success: ()=>{
-      console.log('Success Image Taken')
+    success: (data)=>{
+      console.log('Success Image Taken',data)
     }
   });
 });
 
-
+// request array and display base64 image 
 const getMeme = () =>{
-let sumMemes = '';
+  $.get('/memes', (data) =>{
 
-const everyMeme = (image)=>{
-  console.log(image);
-  const meme = $('#meme');
-  sumMemes = sumMemes+`<img src=/images/${image}?cacheBusting=${Math.random()}>`;
-  meme.html(sumMemes);
-  }
-
-    $.get('/memes', (data) =>{
-
-    data.forEach(everyMeme);
-
-  });
+      let sum = '';
+      data.forEach((meme)=>{
+        $.ajax({
+          type: 'POST',
+          url: '/base64ImageData',
+          contentType: 'application/json',
+          data: JSON.stringify({
+            data: meme
+          }),
+          success: (data)=>{
+            const displayMeme = $('#meme');
+            sum = sum + `<img src=${data}>`;
+            displayMeme.html(sum);
+            console.log('Success Converted Image displayed',data);
+          }
+        })
+      });
+      
+  })
 }
 
 window.setInterval(getMeme, 1000);
