@@ -12,14 +12,12 @@ const ticketResponse = (req,res) =>{
   ticketsLeft = ticketsLeft - req.body.tickets;
   const soldOut = 'Sold Out!';
   
-  if(ticketsLeft <= 0)
-  {
+  if(ticketsLeft <= 0){
     fs.writeFile(`/home/alopez/garagescript/tickets_challenge/public/book1.txt`, `Sold Out: ${soldOut}\n`);
   }else{
-  fs.writeFile("/home/alopez/garagescript/tickets_challenge/public/book1.txt", `Tickets Left: ${ticketsLeft}\n`);
+    fs.writeFile("/home/alopez/garagescript/tickets_challenge/public/book1.txt", `Tickets Left: ${ticketsLeft}\n`);
   }
   res.send();
 }
-
 app.post('/ticket', ticketResponse);
 
