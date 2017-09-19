@@ -19,12 +19,16 @@ app.get('/move', (req,res)=>{
   if(req.query.dir === 'right'){
     left=left+10;
   }
-  
-  app.get('/top', (req,res)=>{
-    res.send(top+'px');
-  })
+  res.send();
 
-  app.get('/left', (req,res)=>{
-    res.send(left+'px');
-  })
 })
+
+app.get('/top', (req,res)=>{
+  res.send(top+'px');
+})
+
+app.get('/left', (req,res)=>{
+  res.send(left+'px');
+})
+
+

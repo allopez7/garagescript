@@ -20,13 +20,26 @@ document.getElementById('left').onclick = ()=>{
   move('left');
 }
 
-setInterval(()=>{
-  const b = new XMLHttpRequest();
-  b.open('GET', '/data')
-  b.onreadystatechange = ()=>{
-    if(b.responseText){
-      m=document.getElementById('img');
-      m.style.marginTop=b.responseText;
+window.setInterval(()=>{
+  const a = new XMLHttpRequest();
+  a.open('GET', '/top')
+  a.onreadystatechange = ()=>{
+    if(a.responseText){
+      const m = document.getElementById('img');
+      m.style.marginTop=a.responseText;
     }
   }
+  a.send();
+
+  const b = new XMLHttpRequest();
+  b.open('GET', '/left')
+  b.onreadystatechange = ()=>{
+    if(b.responseText){
+      const m = document.getElementById('img');
+      m.style.marginLeft=b.responseText;
+    }
+  }
+  b.send();
+ 
 },1000)
+
