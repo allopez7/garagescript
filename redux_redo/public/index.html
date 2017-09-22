@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+
+  <div>
+  <input type="text" id="textInput">
+  <input type="button" value="Add task" id="button">
+  </div>
+
+ <div><pre type="text" id="displayText"></pre></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.7.2/redux.min.js"></script>
+
+  <script>
+  const button = document.getElementById('button');
+  const displayText = document.getElementById('displayText');
+ 
+  const reducers = Redux.combineReducers({
+    task: (s=[], action) =>{
+      if (action.type === 'textDisplay') {
+        s.push(action.payload)
+      }
+      if(action.type === 'eraseText')
+      {
+        s.splice(action.payload, 1);
+      }
+      return s
+   }   
+  });
+ 
+const store = Redux.createStore(reducers);
+
+button.onclick = ()=>{
+ const textInput = document.getElementById('textInput').value;
+ //Dispatch text to display on browser 
+ store.dispatch({
+  type: 'textDisplay',
+  payload: textInput
+ });
+ 
+ //function
+ const funct = ()=>{
+ let str = '';
+ store.getState().task.forEach((value,index)=>{
+   str = str +`<div id="text">${value}</div>`;
+ });
+ displayText.innerHTML = str;
+
+ //Select all 
+ document.getElementById('displayText').forEach((element,index)=>{
+   element.onclick = ()=>{
+     store.dispatch({
+       type: 'eraseText',
+       payload: index
+     })
+     //recursion
+     funct();
+     console.log(store.getState().task);
+   }
+ })
+ }
+ //call function
+ funct();
+}
+
+  </script>
+
+</body>
+</html>
